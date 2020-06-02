@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">My Recipe</string>
+    <string name="title">title</string>
+    <string name="publisher">publisher</string>
+    <string name="score">0</string>
+</resources>
