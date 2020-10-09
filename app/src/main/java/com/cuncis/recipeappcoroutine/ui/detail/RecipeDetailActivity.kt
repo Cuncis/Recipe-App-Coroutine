@@ -21,12 +21,12 @@ class RecipeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe_detail)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val recipe = intent.getParcelableExtra(Constants.EXTRA_QUERY) as Recipe
-        supportActionBar?.title = recipe.title
+        val recipe = intent.getParcelableExtra(Constants.EXTRA_QUERY) as Recipe?
+        supportActionBar?.title = recipe?.title
 
         recipeDetailViewModel = ViewModelProvider(this).get(RecipeDetailViewModel::class.java)
 
-        observeViewModel(recipe.recipeId!!)
+        observeViewModel(recipe?.recipeId!!)
     }
 
     private fun observeViewModel(recipeId: String) {
