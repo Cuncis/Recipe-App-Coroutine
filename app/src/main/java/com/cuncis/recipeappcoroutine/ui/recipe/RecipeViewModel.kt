@@ -4,13 +4,11 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.cuncis.recipeappcoroutine.adapter.RecipeAdapter
 import com.cuncis.recipeappcoroutine.data.api.ApiRepoRecipe
 import com.cuncis.recipeappcoroutine.data.model.Recipe
 import com.cuncis.recipeappcoroutine.ui.base.BaseViewModel
 import com.cuncis.recipeappcoroutine.util.Resource
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class RecipeViewModel @ViewModelInject constructor(private val apiRepoRecipe: ApiRepoRecipe)
     : BaseViewModel<RecipeNavigator>() {

@@ -5,6 +5,7 @@ import androidx.navigation.fragment.findNavController
 import com.cuncis.recipeappcoroutine.R
 import com.cuncis.recipeappcoroutine.databinding.FragmentCategoryBinding
 import com.cuncis.recipeappcoroutine.ui.base.BaseFragment
+import com.cuncis.recipeappcoroutine.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,6 +23,9 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun onReadyAction() {
         categoryViewModel.getCategories()
+        categoryViewModel.adapter.setListener { title ->
+            goToRecipe(title.toString())
+        }
     }
 
     override fun onObserveAction() {
@@ -35,6 +39,7 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
     override fun getViewModel() = categoryViewModel
 
     override fun goToRecipe(title: String) {
-        findNavController().navigate(R.id.action_categoryFragment_to_recipeFragment)
+        requireContext().showToast(title)
+//        findNavController().navigate(R.id.action_categoryFragment_to_recipeFragment)
     }
 }

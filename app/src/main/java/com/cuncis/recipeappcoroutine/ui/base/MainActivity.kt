@@ -1,4 +1,4 @@
-package com.cuncis.recipeappcoroutine.ui
+package com.cuncis.recipeappcoroutine.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

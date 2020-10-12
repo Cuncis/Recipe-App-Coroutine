@@ -3,6 +3,6 @@
     <string name="title">title</string>
     <string name="publisher">publisher</string>
     <string name="score">0</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pathDrawable">android.resource://com.cuncis.recipeappcoroutine/drawable/%s</string>
 </resources>

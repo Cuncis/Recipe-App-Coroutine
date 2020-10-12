@@ -1,6 +1,6 @@
 package com.cuncis.recipeappcoroutine.data.model
 
 data class Category(
-    val categoryTitle: String,
-    val categoryPoster: String
+    val categoryTitle: String?,
+    val categoryPoster: String?
 )

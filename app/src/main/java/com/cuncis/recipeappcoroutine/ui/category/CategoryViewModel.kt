@@ -3,7 +3,6 @@ package com.cuncis.recipeappcoroutine.ui.category
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.cuncis.recipeappcoroutine.adapter.CategoryAdapter
 import com.cuncis.recipeappcoroutine.data.model.Category
 import com.cuncis.recipeappcoroutine.ui.base.BaseViewModel
 import com.cuncis.recipeappcoroutine.util.Constants

@@ -1,23 +1,6 @@
 package com.cuncis.recipeappcoroutine.ui.recipe
 
-import android.content.Intent
-import android.os.Bundle
-import android.view.Menu
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.SearchView
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.cuncis.recipeappcoroutine.R
-import com.cuncis.recipeappcoroutine.adapter.RecipeAdapter
-import com.cuncis.recipeappcoroutine.data.model.Recipe
-import com.cuncis.recipeappcoroutine.ui.detail.RecipeDetailActivity
-import com.cuncis.recipeappcoroutine.util.Constants
-import com.cuncis.recipeappcoroutine.util.Constants.EXTRA_QUERY
-import com.cuncis.recipeappcoroutine.util.Constants.hideLoading
-import com.cuncis.recipeappcoroutine.util.Constants.showLoading
-import kotlinx.android.synthetic.main.activity_recipe.*
 
 class RecipeActivity : AppCompatActivity() {
 

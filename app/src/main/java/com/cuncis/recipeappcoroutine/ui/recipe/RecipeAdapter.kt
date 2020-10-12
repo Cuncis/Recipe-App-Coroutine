@@ -1,4 +1,4 @@
-package com.cuncis.recipeappcoroutine.adapter
+package com.cuncis.recipeappcoroutine.ui.recipe
 
 import android.text.Html
 import android.view.LayoutInflater
