@@ -36,6 +36,9 @@ class RecipeFragment : BaseFragment<FragmentRecipeBinding, RecipeViewModel>(), R
     override fun onReadyAction() {
         requireActivity().title = args.title
         recipeViewModel.getRecipes(args.title,"1")
+        recipeViewModel.adapter.setListener {
+            goToDetail(it)
+        }
     }
 
     override fun onObserveAction() {
@@ -58,7 +61,8 @@ class RecipeFragment : BaseFragment<FragmentRecipeBinding, RecipeViewModel>(), R
         })
     }
 
-    override fun goToDetail(recipe: Recipe.Response.Data?) {
-        findNavController().navigate(R.id.action_recipeFragment_to_detailRecipeFragment)
+    override fun goToDetail(recipeId: String?) {
+        val directions = RecipeFragmentDirections.actionRecipeFragmentToDetailRecipeFragment(recipeId.toString())
+        findNavController().navigate(directions)
     }
 }

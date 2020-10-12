@@ -39,5 +39,10 @@
         android:id="@+id/detailRecipeFragment"
         android:name="com.cuncis.recipeappcoroutine.ui.detail.RecipeDetailFragment"
         android:label="fragment_detail_recipe"
-        tools:layout="@layout/fragment_recipe_detail" />
+        tools:layout="@layout/fragment_recipe_detail" >
+        <argument
+            android:name="recipeId"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>

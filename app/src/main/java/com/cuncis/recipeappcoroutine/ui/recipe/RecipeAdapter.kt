@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.cuncis.recipeappcoroutine.R
 import com.cuncis.recipeappcoroutine.data.model.Recipe
+import com.cuncis.recipeappcoroutine.databinding.ItemRecipeListBinding
 import com.cuncis.recipeappcoroutine.util.setImageFromUrl
 import kotlinx.android.synthetic.main.item_recipe_list.view.*
 import kotlin.math.roundToInt
@@ -16,19 +18,24 @@ import kotlin.math.roundToInt
 class RecipeAdapter: RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
 
     private var recipeList = arrayListOf<Recipe.Response.Data>()
+    private var listener: ((String?) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe_list, parent, false)
-        return RecipeHolder(view)
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = RecipeHolder(
+        DataBindingUtil.inflate(
+            LayoutInflater.from(parent.context),
+            R.layout.item_recipe_list,
+            parent,
+            false
+        )
+    )
 
     override fun getItemCount(): Int = recipeList.size
 
     override fun onBindViewHolder(holder: RecipeHolder, position: Int) {
-        holder.tvTitle.text = Html.fromHtml(recipeList[position].title)
-        holder.tvPublisher.text = recipeList[position].publisher
-        holder.tvScore.text = recipeList[position].socialRank!!.roundToInt().toString()
-        holder.imgPoster.setImageFromUrl(recipeList[position].imageUrl!!)
+        holder.binding.data = recipeList[position]
+        holder.itemView.setOnClickListener {
+            listener?.invoke(recipeList[position].recipeId)
+        }
     }
 
     fun submitList(recipeList: ArrayList<Recipe.Response.Data>) {
@@ -42,14 +49,11 @@ class RecipeAdapter: RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class RecipeHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        var tvTitle: TextView = itemView.recipe_title
-        var tvPublisher: TextView = itemView.recipe_publisher
-        var tvScore: TextView = itemView.recipe_social_score
-        var imgPoster: ImageView = itemView.recipe_image
+    fun setListener(listener: (String?) -> Unit) {
+        this.listener = listener
     }
 
-    interface ItemClickListener {
-        fun onItemClick(position: Int)
+    inner class RecipeHolder(val binding: ItemRecipeListBinding)
+        : RecyclerView.ViewHolder(binding.root) {
     }
 }
