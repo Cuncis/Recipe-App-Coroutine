@@ -1,10 +1,13 @@
 package com.cuncis.recipeappcoroutine.ui.category
 
+import android.view.Menu
+import android.view.MenuItem
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.cuncis.recipeappcoroutine.R
 import com.cuncis.recipeappcoroutine.databinding.FragmentCategoryBinding
 import com.cuncis.recipeappcoroutine.ui.base.BaseFragment
+import com.cuncis.recipeappcoroutine.ui.base.MainActivity
 import com.cuncis.recipeappcoroutine.util.showToast
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -38,8 +41,19 @@ class CategoryFragment : BaseFragment<FragmentCategoryBinding, CategoryViewModel
 
     override fun getViewModel() = categoryViewModel
 
+    override fun onResume() {
+        super.onResume()
+        requireActivity().title = "Category"
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        (activity as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
     override fun goToRecipe(title: String) {
-        requireContext().showToast(title)
-//        findNavController().navigate(R.id.action_categoryFragment_to_recipeFragment)
+        val directions = CategoryFragmentDirections.actionCategoryFragmentToRecipeFragment(title)
+        findNavController().navigate(directions)
     }
 }

@@ -37,6 +37,7 @@ class CategoryAdapter: RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
     }
 
     fun submitList(categoryList: List<Category>) {
+        this.categoryList.clear()
         this.categoryList.addAll(categoryList)
         notifyDataSetChanged()
     }
