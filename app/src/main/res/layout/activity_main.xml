@@ -4,13 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.category.CategoryActivity">
+    tools:context=".ui.MainActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
+    <fragment
+        android:id="@+id/nav_host_base_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rv_category"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"/>
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/nav_graph"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

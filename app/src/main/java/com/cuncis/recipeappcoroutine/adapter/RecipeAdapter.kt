@@ -1,6 +1,5 @@
 package com.cuncis.recipeappcoroutine.adapter
 
-import android.content.Context
 import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
@@ -8,22 +7,19 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.cuncis.recipeappcoroutine.R
 import com.cuncis.recipeappcoroutine.data.model.Recipe
-import com.cuncis.recipeappcoroutine.util.Utils.Companion.setImageFromUrl
-import kotlinx.android.synthetic.main.activity_recipe.view.*
+import com.cuncis.recipeappcoroutine.util.setImageFromUrl
 import kotlinx.android.synthetic.main.item_recipe_list.view.*
 import kotlin.math.roundToInt
 
-class RecipeAdapter(private val context: Context): RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
+class RecipeAdapter: RecyclerView.Adapter<RecipeAdapter.RecipeHolder>() {
 
-    private var recipeList: List<Recipe> = ArrayList()
+    private var recipeList = arrayListOf<Recipe.Response.Data>()
     private lateinit var itemClickListener: ItemClickListener
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecipeHolder {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_recipe_list, parent, false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe_list, parent, false)
         return RecipeHolder(view)
     }
 
@@ -36,8 +32,8 @@ class RecipeAdapter(private val context: Context): RecyclerView.Adapter<RecipeAd
         holder.imgPoster.setImageFromUrl(recipeList[position].imageUrl!!)
     }
 
-    fun setRecipeList(recipeList: List<Recipe>) {
-        this.recipeList = recipeList
+    fun submitList(recipeList: ArrayList<Recipe.Response.Data>) {
+        this.recipeList.addAll(recipeList)
         notifyDataSetChanged()
     }
 
@@ -45,7 +41,7 @@ class RecipeAdapter(private val context: Context): RecyclerView.Adapter<RecipeAd
         this.itemClickListener = itemClickListener;
     }
 
-    fun updateList(recipeList: List<Recipe>) {
+    fun updateList(recipeList: ArrayList<Recipe.Response.Data>) {
         this.recipeList = recipeList
         notifyDataSetChanged()
     }

@@ -1,0 +1,3 @@
+package com.cuncis.recipeappcoroutine.ui.detail
+
+interface RecipeDetailNavigator

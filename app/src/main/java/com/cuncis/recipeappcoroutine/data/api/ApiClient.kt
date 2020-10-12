@@ -1,6 +1,7 @@
 package com.cuncis.recipeappcoroutine.data.api
 
 import com.cuncis.recipeappcoroutine.util.Constants
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -8,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    val theRecipeApi: TheRecipeApi
+    val apiServiceRecipe: ApiServiceRecipe
         get() {
             val interceptor = HttpLoggingInterceptor()
             interceptor.level = HttpLoggingInterceptor.Level.BODY
@@ -20,9 +21,10 @@ object ApiClient {
                 .baseUrl(Constants.BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .build()
 
-            return retrofit.create(TheRecipeApi::class.java)
+            return retrofit.create(ApiServiceRecipe::class.java)
         }
 
 }

@@ -1,36 +1,35 @@
 package com.cuncis.recipeappcoroutine.ui.recipe
 
+import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.cuncis.recipeappcoroutine.adapter.RecipeAdapter
+import com.cuncis.recipeappcoroutine.data.api.ApiRepoRecipe
 import com.cuncis.recipeappcoroutine.data.model.Recipe
-import com.cuncis.recipeappcoroutine.util.Constants
-import kotlinx.coroutines.Dispatchers
+import com.cuncis.recipeappcoroutine.ui.base.BaseViewModel
+import com.cuncis.recipeappcoroutine.util.Resource
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.IOException
-import java.lang.Exception
+import javax.inject.Inject
 
-class RecipeViewModel : ViewModel() {
+class RecipeViewModel @ViewModelInject constructor(private val apiRepoRecipe: ApiRepoRecipe)
+    : BaseViewModel<RecipeNavigator>() {
 
-    var loading = MutableLiveData<Boolean>()
-    var errorMessage = MutableLiveData<String>()
-    var repository = RecipeRepository()
-    var recipeList = MutableLiveData<ArrayList<Recipe>>()
+    private val _recipes = MutableLiveData<Resource<Recipe.Response>>()
+    val recipe: LiveData<Resource<Recipe.Response>>
+        get() = _recipes
 
-    fun getRecipes(query: String, page: String): MutableLiveData<ArrayList<Recipe>> {
+    val adapter = RecipeAdapter()
 
-        viewModelScope.launch(Dispatchers.IO) {
-            withContext(Dispatchers.Main) {
-                try {
-                    recipeList.postValue(repository.getRecipes(query, page).recipes)
-                    loading.value = false
-                } catch (e: Exception) {
-                    errorMessage.value = e.localizedMessage
-                    loading.value = false
-                }
+    fun getRecipes(query: String, page: String) {
+        _recipes.postValue(Resource.loading(null))
+        viewModelScope.launch {
+            try {
+                val response = apiRepoRecipe.getRecipe(query, page)
+                _recipes.postValue(Resource.success(response))
+            } catch (t: Throwable) {
+                _recipes.postValue(Resource.error(t.message, null))
             }
         }
-        return recipeList
     }
 }
